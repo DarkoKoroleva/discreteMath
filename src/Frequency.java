@@ -3,9 +3,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Frequency {
-    private HashMap<Character, Integer> letter = new HashMap<>();
 
-    public HashMap<Character, Integer> getFreqOfOccurrence(File file) {
+    public static HashMap<Character, Integer> getFreqOfOccurrence(File file) {
+        HashMap<Character, Integer> letter = new HashMap<>();
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             char c;
             while ((c = (char) reader.read()) != (char) -1) {

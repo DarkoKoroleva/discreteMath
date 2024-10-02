@@ -1,16 +1,36 @@
-import java.io.File;
+import java.io.*;
+
+import static java.lang.System.exit;
 
 public class Main {
     public static void main(String[] args) {
-        File file = new File("src/text");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            while (true) {
+                try {
+                    String s = reader.readLine();
 
-        Frequency frequency = new Frequency();
-        Fano fano = new Fano();
-
-        fano.fano(frequency.getFreqOfOccurrence(file));
-        System.out.println(fano.getEncoding());
-        String code = fano.encryptText(file);
-        System.out.println(code);
-        System.out.println(fano.decode(code));
+                    String[] arg = s.split(" ");
+                    if (arg.length == 1) {
+                        if (arg[0].equals("exit")) {
+                            exit(0);
+                        }
+                        File file = new File(arg[0]);
+                        Coder.encryptText(file);
+                    }
+                    else if (arg.length == 2) {
+                        File fileDecode = new File(arg[0]);
+                        File encodeFile = new File(arg[1]);
+                        Decoder.decode(fileDecode, encodeFile);
+                    }
+                    else {
+                        System.out.println("the wrong input");
+                    }
+                } catch (RuntimeException e) {
+                    System.out.println("file not found");
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
