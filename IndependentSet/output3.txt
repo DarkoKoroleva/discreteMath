@@ -1,0 +1,2 @@
+Maximum Independent Set: [1, 4]
+Minimum Vertex Cover: [2, 3]
